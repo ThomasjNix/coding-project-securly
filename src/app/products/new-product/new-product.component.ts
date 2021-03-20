@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Product } from '../product';
+import { ProductService } from '../product.service';
 
 @Component({
   selector: 'app-new-product',
@@ -11,7 +12,7 @@ import { Product } from '../product';
 export class NewProductComponent implements OnInit {
 
   addProductForm: FormGroup;
-  constructor(private router: Router) { }
+  constructor(private router: Router, private productService: ProductService) { }
 
   ngOnInit(): void {
     this.initializeForm();
@@ -57,8 +58,12 @@ export class NewProductComponent implements OnInit {
   addNewItem() {
     if (this.addProductForm.valid) {
       const newValue = new Product(this.addProductForm.value);
-      // TODO implement mock API POST
-      this.router.navigate(['/']);
+      this.productService.addNewProduct(newValue).subscribe(
+        () => { this.router.navigate(['/']); },
+        (error) => { 
+          // TODO handle error}
+        }
+      );
     } else {
       // Will show errors for any untouched or invalid fields not already showing errors
       this.addProductForm.markAllAsTouched();

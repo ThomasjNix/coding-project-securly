@@ -1,9 +1,16 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Product } from './product';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  addNewProduct(newProduct: Product): Observable<any> {
+    return <Observable<any>>this.http.post('/api/product/add-product', newProduct);
+  }
 }
