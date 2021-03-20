@@ -1,4 +1,59 @@
-<form [formGroup]="addProductForm"></form>
+<form [formGroup]="addProductForm" class="form">
+    <label class="fc-field">
+        <span class="fc-field-name">
+            Product Name
+            <span class="fc-field-required" *ngIf="isRequired('fullName')">*</span>
+        </span>
+        <div class="fc-field-input">
+            <input type="text" formControlName="fullName" class="fc-field-value">
+            <span class="fc-field-error" *ngIf="fieldHasError('fullName', 'required')">This field is required.</span>
+        </div>
+    </label>
+    <label class="fc-field">
+        <span class="fc-field-name">
+            Short Name
+            <span class="fc-field-required" *ngIf="isRequired('shortName')">*</span>
+        </span>
+        <div class="fc-field-input">
+            <input type="text" formControlName="shortName" class="fc-field-value">
+            <span class="fc-field-error" *ngIf="fieldHasError('shortName', 'required')">This field is required.</span>
+        </div>
+    </label>
+    <label class="fc-field">
+        <span class="fc-field-name">
+            Image
+            <span class="fc-field-required" *ngIf="isRequired('imageUrl')">*</span>
+        </span>
+        <div class="fc-field-input">
+            <input type="text" formControlName="imageUrl" class="fc-field-value">
+            <span class="fc-field-error" *ngIf="fieldHasError('imageUrl', 'required')">This field is required.</span>
+        </div>
+    </label>
+    <label class="fc-field">
+        <span class="fc-field-name">
+            Price
+            <span class="fc-field-required" *ngIf="isRequired('price')">*</span>
+        </span>
+        <div class="fc-field-input">
+            <input type="text" formControlName="price" class="fc-field-value">
+            <span class="fc-field-error" *ngIf="fieldHasError('price', 'required')">This field is required.</span>
+        </div>
+    </label>
+    <label class="fc-field">
+        <span class="fc-field-name">
+            Post Date
+            <span class="fc-field-required" *ngIf="isRequired('postedDate')">*</span>
+        </span>
+        <div class="fc-field-input">
+            <input type="text" formControlName="postedDate" class="fc-field-value">
+            <span class="fc-field-error" *ngIf="fieldHasError('postedDate', 'required')">This field is required.</span>
+        </div>
+    </label>
+</form>
 
-<a routerLink="/">Cancel</a>
-<a routerLink="/">Save</a>
+<div class="link-group">
+    <button class="link link-cancel">
+        <a routerLink="/" class="link-cancel-anchor">Cancel</a>
+    </button>
+    <button (click)="addNewItem()" class="link link-save">Save</button>
+</div>

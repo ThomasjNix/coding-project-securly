@@ -1,0 +1,64 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+
+    .fc-field {
+        margin: 1em 0;
+        display: flex;
+
+        &-name {
+            flex: 1;
+        }
+
+        &-input { 
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        &-value {
+            flex: 1;
+        }
+
+        &-error {
+            color: red;
+            margin: 0.25em 0;
+        }
+
+        &-required {
+            color: red;
+        }
+    }
+}
+
+.link-group {
+    margin: 2em 0;
+    .link {
+        border: 1px solid blue;
+        text-decoration: none;
+        padding: 0.25em 2em;
+        margin: 0 1em;
+        border-radius: 10px;
+        color: blue;
+        background-color: white;
+
+        &-cancel {
+            margin-left: 0;
+
+            &-anchor {
+                color: blue;
+                text-decoration: none;
+            }
+        }
+
+        &-save {
+            background-color: blue;
+            color: white;
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
