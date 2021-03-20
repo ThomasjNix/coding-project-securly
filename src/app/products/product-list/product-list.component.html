@@ -1,4 +1,4 @@
 <div class="product-list">
-    <p>list here</p>
+    <p *ngFor="let product of productList">{{ product.fullName }}</p>
 </div>
 <a routerLink="/add-product">Add item</a>

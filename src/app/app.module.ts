@@ -4,6 +4,8 @@ import { AppComponent } from './app.component';
 import { RoutingModule } from './routing.module';
 import { ProductModule } from './products/product.module';
 import { ProductRoutingModule } from './products/product-routing.module';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MockApiInterceptor } from './http/mock-api-interceptor.interceptor';
 
 @NgModule({
   declarations: [
@@ -13,9 +15,12 @@ import { ProductRoutingModule } from './products/product-routing.module';
     BrowserModule,
     RoutingModule,
     ProductModule,
-    ProductRoutingModule
+    ProductRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: MockApiInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
