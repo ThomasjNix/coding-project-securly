@@ -37,6 +37,7 @@
         <div class="fc-field-input">
             <input type="text" formControlName="price" class="fc-field-value">
             <span class="fc-field-error" *ngIf="fieldHasError('price', 'required')">This field is required.</span>
+            <span class="fc-field-error" *ngIf="fieldHasError('price', 'pattern')">Please enter a valid whole or decimal number.</span>
         </div>
     </label>
     <label class="fc-field">
@@ -45,7 +46,7 @@
             <span class="fc-field-required" *ngIf="isRequired('postedDate')">*</span>
         </span>
         <div class="fc-field-input">
-            <input type="text" formControlName="postedDate" class="fc-field-value">
+            <input type="date" formControlName="postedDate" class="fc-field-value">
             <span class="fc-field-error" *ngIf="fieldHasError('postedDate', 'required')">This field is required.</span>
         </div>
     </label>

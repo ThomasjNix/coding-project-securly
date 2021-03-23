@@ -26,7 +26,7 @@ export class NewProductComponent implements OnInit {
       'fullName': new FormControl('', [Validators.required]),
       'shortName': new FormControl(''),
       'imageUrl': new FormControl('', [Validators.required]),
-      'price': new FormControl('', [Validators.required]),
+      'price': new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]*)\?$')]),
       'postedDate': new FormControl('', [Validators.required]),
     });
   }
@@ -52,7 +52,7 @@ export class NewProductComponent implements OnInit {
    */
   fieldHasError(fieldName: string, errorName: string) {
     const field = this.addProductForm.get(fieldName);
-    return field?.errors?.required && field?.touched;
+    return field?.errors && field?.errors[errorName] && field?.touched;
   }
 
   addNewItem() {

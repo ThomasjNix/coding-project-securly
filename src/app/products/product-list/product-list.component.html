@@ -1,33 +1,50 @@
-<div class="product-list">
-    <div *ngFor="let product of productList">
-        <p *ngIf="shownItems.fullName">{{ product.fullName }}</p>
-        <p *ngIf="shownItems.shortName">{{ product.shortName }}</p>
-        <p *ngIf="shownItems.imageUrl">{{ product.imageUrl }}</p>
-        <p *ngIf="shownItems.price">{{ product.price }}</p>
-        <p *ngIf="shownItems.postedDate">{{ product.postedDate }}</p>
-        <button (click)="deleteItems([product])">Delete</button>
-    </div>
+<div class="meta-table-options">
+    <button (click)="deleteSelectedItems()">Delete</button>
+    <input #filterSearch type="text" placeholder="Filter" [(ngModel)]="filterText" (keyup)="filterRows($event)">
+    <button (click)="toggleTableOptionsDisplay()">
+        <fa-icon [icon]="faCog" size="xs"></fa-icon>
+    </button>
 </div>
+
+<table>
+    <thead>
+        <th><input #selectAllCheckbox type="checkbox" [indeterminate]="anyRowSelected()" (change)="toggleAllRows()"></th>
+        <ng-container *ngFor="let column of columnDisplayOrder">
+            <th *ngIf="shownItems[column.fieldName]">{{ column.columnName }}</th>
+        </ng-container>
+    </thead>
+    <tr *ngFor="let product of filteredProductList; let i = index" [attr.data-index]="i">
+      <td *ngIf="showCheckbox()">
+          <input #rowCheckboxes type="checkbox" (change)="toggleRowSelected(i)">
+      </td>
+      <ng-container *ngFor="let column of columnDisplayOrder">
+          <td *ngIf="shownItems[column.fieldName]">
+              <ng-container [ngSwitch]="column.fieldName">
+                <span *ngSwitchCase="'postedDate'">{{ product[column.fieldName] | date : 'MM/dd/yyyy' }}</span>
+                <a *ngSwitchCase="'imageUrl'" href="{{ product.imageUrl }}">{{ product[column.fieldName] }}</a>
+                <span *ngSwitchDefault>{{ product[column.fieldName] }}</span>
+              </ng-container>
+            </td>
+      </ng-container>
+    </tr>
+  </table>
+
 <a routerLink="/add-product">Add item</a>
 
-<h3>Display fields:</h3>
-<div>
-    <label for="fullName">Full Name</label>
-    <input type="checkbox" checked name="fullName" id="fullName" [(ngModel)]="shownItems.fullName">
-</div>
-<div>
-    <label for="shortName">Short Name</label>
-    <input type="checkbox" checked name="shortName" id="shortName" [(ngModel)]="shownItems.shortName">
-</div>
-<div>
-    <label for="imageUrl">Image URL</label>
-    <input type="checkbox" checked name="imageUrl" id="imageUrl" [(ngModel)]="shownItems.imageUrl">
-</div>
-<div>
-    <label for="price">Price</label>
-    <input type="checkbox" checked name="price" id="price" [(ngModel)]="shownItems.price">
-</div>
-<div>
-    <label for="postedDate">Posted date</label>
-    <input type="checkbox" checked name="postedDate" id="postedDate" [(ngModel)]="shownItems.postedDate">
+<div [ngClass]="{'hide-table-options': !displayTableOptions}">
+    <div
+    class="draggable-column-names"
+    draggable="true" 
+    *ngFor="let column of columnDisplayOrder; let i = index;"
+    [id]="'column-index-' + i"
+    (dragstart)="handleDragStart($event)"
+    (dragenter)="handleDrag($event)"
+    (dragleave)="handleDrag($event)"
+    (dragover)="handleDrag($event)"
+    (drop)="handleDrag($event, i)">
+        <fa-icon [icon]="faBars" size="xs"></fa-icon>
+        <input type="checkbox" checked name="{{ column.fieldName }}" id="{{ column.fieldName }}" [(ngModel)]="shownItems[column.fieldName]">
+        <label for="{{ column.fieldName }}">{{ column.columnName }}</label>
+    </div>
+    <button (click)="resetColumnOrder()">Reset to Default</button>
 </div>

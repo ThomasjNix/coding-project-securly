@@ -118,7 +118,7 @@ export class MockApiInterceptor implements HttpInterceptor {
         return true;
       });
   
-      if (itemIndex) {
+      if (itemIndex > -1) {
         locallyStoredProductList.splice(itemIndex, 1);
       }
     }
