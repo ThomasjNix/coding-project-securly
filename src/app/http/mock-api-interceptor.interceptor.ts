@@ -41,28 +41,19 @@ export class MockApiInterceptor implements HttpInterceptor {
         case '/api/product/add-product':
           if (request.body instanceof Product) {
             this.addNewProduct(request.body);
-            body = this.getLocallyStoredProductList
+            body = this.getLocallyStoredProductList();
           } else {
             hasError = true;
             error = 'Invalid parameters provided';
           }
           break;
-        default:
-          body = [];
-      }
-    } else {
-      switch (request.url) {
-        case '/api/product/delete':
-          if (request.body instanceof Product) {
-            if (this.deleteProduct(request.body)) {
-              body = this.getLocallyStoredProductList
-            } else {
-              hasError = true;
-              error = 'Product not found';
-            }
+        case '/api/products/delete':
+          if (request.body instanceof Array) {
+            this.deleteProducts(request.body);
+            body = this.getLocallyStoredProductList();
           } else {
             hasError = true;
-            error = 'Product not found';
+            error = 'Invalid list of products provided';
           }
           break;
         default:
@@ -110,27 +101,28 @@ export class MockApiInterceptor implements HttpInterceptor {
    * Else return false (failure - item not found)
    * @param product 
    */
-  deleteProduct(product: Product): boolean {
-    const locallyStoredProductList = this.getLocallyStoredProductList();
+  deleteProducts(products: Product[]): void {
+    let locallyStoredProductList = this.getLocallyStoredProductList();
 
-    let itemIndex = -1;
+    for (const product of products) {
+      let itemIndex = -1;
 
-    // Ensure all properties in localStorage item match provided body parameters
-    locallyStoredProductList.find((listProduct, index) => {
-      for (const key in Object.keys(listProduct)) {
-        if (listProduct[key] !== product[key]) {
-          return false;
+      // Ensure all properties in localStorage item match provided body parameters
+      locallyStoredProductList.find((listProduct, index) => {
+        for (const key of Object.keys(listProduct)) {
+          if (listProduct[key] !== product[key]) {
+            return false;
+          }
         }
+        itemIndex = index;
+        return true;
+      });
+  
+      if (itemIndex) {
+        locallyStoredProductList.splice(itemIndex, 1);
       }
-      return true;
-    });
-
-    if (itemIndex) {
-      locallyStoredProductList.splice(0, itemIndex);
-      localStorage.setItem('productList', JSON.stringify(locallyStoredProductList));
-      return true;
     }
-    return false;
+    localStorage.setItem('productList', JSON.stringify(locallyStoredProductList));
   }
 
   /**

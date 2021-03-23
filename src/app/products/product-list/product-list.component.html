@@ -1,4 +1,33 @@
 <div class="product-list">
-    <p *ngFor="let product of productList">{{ product.fullName }}</p>
+    <div *ngFor="let product of productList">
+        <p *ngIf="shownItems.fullName">{{ product.fullName }}</p>
+        <p *ngIf="shownItems.shortName">{{ product.shortName }}</p>
+        <p *ngIf="shownItems.imageUrl">{{ product.imageUrl }}</p>
+        <p *ngIf="shownItems.price">{{ product.price }}</p>
+        <p *ngIf="shownItems.postedDate">{{ product.postedDate }}</p>
+        <button (click)="deleteItems([product])">Delete</button>
+    </div>
 </div>
 <a routerLink="/add-product">Add item</a>
+
+<h3>Display fields:</h3>
+<div>
+    <label for="fullName">Full Name</label>
+    <input type="checkbox" checked name="fullName" id="fullName" [(ngModel)]="shownItems.fullName">
+</div>
+<div>
+    <label for="shortName">Short Name</label>
+    <input type="checkbox" checked name="shortName" id="shortName" [(ngModel)]="shownItems.shortName">
+</div>
+<div>
+    <label for="imageUrl">Image URL</label>
+    <input type="checkbox" checked name="imageUrl" id="imageUrl" [(ngModel)]="shownItems.imageUrl">
+</div>
+<div>
+    <label for="price">Price</label>
+    <input type="checkbox" checked name="price" id="price" [(ngModel)]="shownItems.price">
+</div>
+<div>
+    <label for="postedDate">Posted date</label>
+    <input type="checkbox" checked name="postedDate" id="postedDate" [(ngModel)]="shownItems.postedDate">
+</div>
