@@ -73,6 +73,16 @@ export class MockApiInterceptor implements HttpInterceptor {
     if (!localStorage.getItem('productList')) {
       localStorage.setItem('productList', JSON.stringify(this.readProductsFromJson()));
     }
+    const productList = JSON.parse(localStorage.getItem('productList'));
+    let indexCounter = 0;
+    for (const product of productList) {
+      if (product.position && product.position > -1) {
+        indexCounter = product.position;
+      } else {
+        product.position = indexCounter;
+        indexCounter++;
+      }
+    }
     return JSON.parse(localStorage.getItem('productList')) || [];
   }
 
@@ -118,7 +128,7 @@ export class MockApiInterceptor implements HttpInterceptor {
         return true;
       });
   
-      if (itemIndex) {
+      if (itemIndex > -1) {
         locallyStoredProductList.splice(itemIndex, 1);
       }
     }

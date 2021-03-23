@@ -6,6 +6,7 @@ import { ProductModule } from './products/product.module';
 import { ProductRoutingModule } from './products/product-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MockApiInterceptor } from './http/mock-api-interceptor.interceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { MockApiInterceptor } from './http/mock-api-interceptor.interceptor';
     RoutingModule,
     ProductModule,
     ProductRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: MockApiInterceptor, multi: true }

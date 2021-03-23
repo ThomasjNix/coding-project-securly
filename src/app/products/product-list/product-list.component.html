@@ -1,4 +1,56 @@
-<div class="product-list">
+<mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Filter" #input>
+</mat-form-field>
+
+<button mat-button color="warn" (click)="deleteItems()" [disabled]="deleteDisabled()">Delete</button>
+
+<table mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()"
+                        [aria-label]="checkboxLabel()">
+        </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)"
+                        [aria-label]="checkboxLabel(row)">
+        </mat-checkbox>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="fullName">
+        <th mat-header-cell *matHeaderCellDef> Full Name </th>
+        <td mat-cell *matCellDef="let product"> {{product.fullName}} </td>
+    </ng-container>
+    <ng-container matColumnDef="shortName">
+        <th mat-header-cell *matHeaderCellDef> Short Name </th>
+        <td mat-cell *matCellDef="let product"> {{product.shortName}} </td>
+    </ng-container>
+    <ng-container matColumnDef="imageUrl">
+        <th mat-header-cell *matHeaderCellDef> Image URL </th>
+        <td mat-cell *matCellDef="let product"> {{product.imageUrl}} </td>
+    </ng-container>
+    <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef> Price </th>
+        <td mat-cell *matCellDef="let product"> {{product.price}} </td>
+    </ng-container>
+    <ng-container matColumnDef="postedDate">
+        <th mat-header-cell *matHeaderCellDef> Posted Date </th>
+        <td mat-cell *matCellDef="let product"> {{product.postedDate}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="shownItems"></tr>
+    <tr mat-row *matRowDef="let product; columns: shownItems"></tr>
+    <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4" *ngIf="productList.length > 0">No data matching the filter "{{input.value}}"</td>
+      </tr>
+</table>
+
+
+<!-- <div class="product-list">
     <div *ngFor="let product of productList">
         <p *ngIf="shownItems.fullName">{{ product.fullName }}</p>
         <p *ngIf="shownItems.shortName">{{ product.shortName }}</p>
@@ -7,27 +59,28 @@
         <p *ngIf="shownItems.postedDate">{{ product.postedDate }}</p>
         <button (click)="deleteItems([product])">Delete</button>
     </div>
-</div>
-<a routerLink="/add-product">Add item</a>
+</div> -->
+
+<button mat-button color="primary" (click)="goToAddProduct()">Add Item</button>
 
 <h3>Display fields:</h3>
 <div>
     <label for="fullName">Full Name</label>
-    <input type="checkbox" checked name="fullName" id="fullName" [(ngModel)]="shownItems.fullName">
+    <input type="checkbox" checked name="fullName" id="fullName" (click)="toggleDisplay('fullName')">
 </div>
 <div>
     <label for="shortName">Short Name</label>
-    <input type="checkbox" checked name="shortName" id="shortName" [(ngModel)]="shownItems.shortName">
+    <input type="checkbox" checked name="shortName" id="shortName" (click)="toggleDisplay('shortName')">
 </div>
 <div>
     <label for="imageUrl">Image URL</label>
-    <input type="checkbox" checked name="imageUrl" id="imageUrl" [(ngModel)]="shownItems.imageUrl">
+    <input type="checkbox" checked name="imageUrl" id="imageUrl" (click)="toggleDisplay('imageUrl')">
 </div>
 <div>
     <label for="price">Price</label>
-    <input type="checkbox" checked name="price" id="price" [(ngModel)]="shownItems.price">
+    <input type="checkbox" checked name="price" id="price" (click)="toggleDisplay('price')">
 </div>
 <div>
     <label for="postedDate">Posted date</label>
-    <input type="checkbox" checked name="postedDate" id="postedDate" [(ngModel)]="shownItems.postedDate">
+    <input type="checkbox" checked name="postedDate" id="postedDate" (click)="toggleDisplay('postedDate')">
 </div>
