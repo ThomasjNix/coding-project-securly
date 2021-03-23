@@ -100,7 +100,9 @@ export class ProductListComponent implements OnInit {
     } else {
       for (let i = 0; i < this.productList.length; i++) {
         if (this.selectedRows.indexOf(i) === -1) {
-          this.selectedRows.push(i);
+          if (!this.filterText || (this.filterText && this.productList[i].fullName.toLowerCase().indexOf(this.filterText.toLowerCase()) > -1)) {
+            this.selectedRows.push(i);
+          }
         }
       }
     }
@@ -126,6 +128,7 @@ export class ProductListComponent implements OnInit {
     }
     this.selectedRows = [];
     this.deleteItems(toDeleteProducts);
+    this.selectAllCheckbox.nativeElement.checked = this.selectedRows.length > 0;
   }
 
   filterRows(event: any): void {
