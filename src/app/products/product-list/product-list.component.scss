@@ -1,7 +1,67 @@
+@import '../../../variables';
+
+input[type="checkbox"] {
+    box-shadow: 0 0 0 1px $checkbox-shadow;
+}
+
 .hide-table-options {
     visibility: hidden;
 }
 
 .draggable-column-names {
     margin: 1em 0;
+}
+
+.meta-table-options {
+    width: 80%;
+    margin: 1em auto;
+    background-color: $table-background;
+
+    .table-meta-settings {
+        position: absolute;
+        padding: 1em;
+        box-shadow: 0 0 2px black;
+
+        &-toggle {
+            float: right;
+        }
+    }
+
+    button, input {
+        margin: 1em;
+    }
+}
+
+// Table styles
+.list-table {
+    background-color: $table-header-background;
+    width: 80%;
+    margin: 0 auto;
+    clear: both;
+
+    thead {
+        background-color: $table-header-background;
+        
+        th {
+            padding: 1em;
+            text-align: left;
+        }
+    }
+
+   tr {
+       background-color: $table-background;
+       padding: 0 2em;
+       td {
+           padding: 1em;
+
+           .row-image {
+               max-width: 15%;
+           }
+       }
+   }
+
+   thead th,
+   tr td {
+       border-bottom: 1px solid $table-borders;
+   }
 }

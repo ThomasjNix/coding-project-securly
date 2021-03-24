@@ -1,12 +1,29 @@
 <div class="meta-table-options">
     <button (click)="deleteSelectedItems()">Delete</button>
     <input #filterSearch type="text" placeholder="Filter" [(ngModel)]="filterText" (keyup)="filterRows($event)">
-    <button (click)="toggleTableOptionsDisplay()">
+    <button (click)="toggleTableOptionsDisplay()" class="table-meta-settings-toggle">
         <fa-icon [icon]="faCog" size="xs"></fa-icon>
+        <div class="table-meta-settings" [ngClass]="{'hide-table-options': !displayTableOptions}">
+            <div
+            class="draggable-column-names"
+            draggable="true" 
+            *ngFor="let column of columnDisplayOrder; let i = index;"
+            [id]="'column-index-' + i"
+            (dragstart)="handleDragStart($event)"
+            (dragenter)="handleDrag($event)"
+            (dragleave)="handleDrag($event)"
+            (dragover)="handleDrag($event)"
+            (drop)="handleDrag($event, i)">
+                <fa-icon [icon]="faBars" size="xs"></fa-icon>
+                <input type="checkbox" checked name="{{ column.fieldName }}" id="{{ column.fieldName }}" [(ngModel)]="shownItems[column.fieldName]">
+                <label for="{{ column.fieldName }}">{{ column.columnName }}</label>
+            </div>
+            <button (click)="resetColumnOrder()">Reset to Default</button>
+        </div>
     </button>
 </div>
 
-<table>
+<table class="list-table" cellspacing="0">
     <thead>
         <th><input #selectAllCheckbox type="checkbox" [indeterminate]="anyRowSelected()" (change)="toggleAllRows()"></th>
         <ng-container *ngFor="let column of columnDisplayOrder">
@@ -21,7 +38,7 @@
           <td *ngIf="shownItems[column.fieldName]">
               <ng-container [ngSwitch]="column.fieldName">
                 <span *ngSwitchCase="'postedDate'">{{ product[column.fieldName] | date : 'MM/dd/yyyy' }}</span>
-                <a *ngSwitchCase="'imageUrl'" href="{{ product.imageUrl }}">{{ product[column.fieldName] }}</a>
+                <img class="row-image" *ngSwitchCase="'imageUrl'" src="{{ product.imageUrl }}" alt="{{ product.imageUrl }}">
                 <span *ngSwitchDefault>{{ product[column.fieldName] }}</span>
               </ng-container>
             </td>
@@ -30,21 +47,3 @@
   </table>
 
 <a routerLink="/add-product">Add item</a>
-
-<div [ngClass]="{'hide-table-options': !displayTableOptions}">
-    <div
-    class="draggable-column-names"
-    draggable="true" 
-    *ngFor="let column of columnDisplayOrder; let i = index;"
-    [id]="'column-index-' + i"
-    (dragstart)="handleDragStart($event)"
-    (dragenter)="handleDrag($event)"
-    (dragleave)="handleDrag($event)"
-    (dragover)="handleDrag($event)"
-    (drop)="handleDrag($event, i)">
-        <fa-icon [icon]="faBars" size="xs"></fa-icon>
-        <input type="checkbox" checked name="{{ column.fieldName }}" id="{{ column.fieldName }}" [(ngModel)]="shownItems[column.fieldName]">
-        <label for="{{ column.fieldName }}">{{ column.columnName }}</label>
-    </div>
-    <button (click)="resetColumnOrder()">Reset to Default</button>
-</div>
