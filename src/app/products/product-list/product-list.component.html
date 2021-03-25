@@ -38,7 +38,7 @@
 
 <table class="list-table" cellspacing="0">
     <thead>
-        <th><input #selectAllCheckbox type="checkbox" [indeterminate]="anyRowSelected()" (change)="toggleAllRows()"></th>
+        <th><input #selectAllCheckbox type="checkbox" [indeterminate]="anyButNotAllRowsSelected()" (change)="toggleAllRows()"></th>
         <ng-container *ngFor="let column of columnDisplayOrder">
             <th *ngIf="shownItems[column.fieldName]">{{ column.columnName }}</th>
         </ng-container>

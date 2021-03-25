@@ -55,14 +55,14 @@ export class NewProductComponent implements OnInit {
     return field?.errors && field?.errors[errorName] && field?.touched;
   }
 
+  /**
+   * Makes a call to add the new product to the localStorage and navigates to the list page on success
+   */
   addNewItem(): void {
     if (this.addProductForm.valid) {
       const newValue = new Product(this.addProductForm.value);
       this.productService.addNewProduct(newValue).subscribe(
-        () => { this.router.navigate(['/']); },
-        (error) => { 
-          // TODO handle error}
-        }
+        () => { this.router.navigate(['/']); }
       );
     } else {
       // Will show errors for any untouched or invalid fields not already showing errors
