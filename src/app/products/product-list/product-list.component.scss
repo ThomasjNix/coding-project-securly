@@ -9,8 +9,8 @@ input[type="checkbox"] {
 }
 
 .meta-table-options {
-    width: 80%;
-    margin: 1em auto;
+    width: 80vw;
+    margin: 1rem auto;
     background-color: $table-background;
     color: $text-color;
 
@@ -36,7 +36,7 @@ input[type="checkbox"] {
         }
 
         .draggable-column-names {
-            margin: 1em 0;
+            margin: 1rem 0;
             display: flex;
             align-items: center;
             border-bottom: 1px solid $background-color;
@@ -122,7 +122,7 @@ input[type="checkbox"] {
     
 
     button, input {
-        margin: 1em;
+        margin: 1rem;
     }
 }
 
@@ -130,7 +130,7 @@ input[type="checkbox"] {
 .list-table {
     color: $text-color;
     background-color: $table-header-background;
-    width: 80%;
+    width: 80vw;
     margin: 0 auto 5vh auto;
     clear: both;
 
@@ -171,4 +171,70 @@ input[type="checkbox"] {
    tr td {
        border-bottom: 1px solid $table-borders;
    }
+}
+
+@media (max-width: $screen-xs-max) {
+    .meta-table-options {
+        .table-meta-settings {
+            width: 33vw;
+        }
+    }
+
+    .list-table {
+        tr {
+            td {
+                .row-image {
+                    max-width: 67%;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: $screen-md-max) {
+    .meta-table-options {
+        .search {
+            width: 25%;
+        }
+        .add-product-link {
+            left: 5vw;
+        }
+    }
+}
+
+@media (max-width: $screen-lg-max) {
+    .meta-table-options {
+        .table-meta-settings {
+            width: 20vw;
+        }
+    }
+    .list-table {
+        tr {
+            td {
+                .row-image {
+                    max-width: 50%;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: $screen-sm-max) and (min-height: 1024px) {
+    .meta-table-options {
+        .table-meta-settings {
+            width: 33vw;
+        }
+    }
+}
+
+@media (orientation: portrait) and (max-width: $screen-xs-max) and (max-height: 900px) {
+    .meta-table-options {
+        width: 100%;
+        .table-meta-settings {
+            width: 50vw;
+        }
+    }
+    .list-table {
+        width: 100vw;
+    }
 }

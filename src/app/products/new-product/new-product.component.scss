@@ -2,9 +2,9 @@
 
 .add-product-section {
     background-color: white;
-    width: 80%;
-    margin: 2em auto;
-    padding: 3em;
+    width: 80vw;
+    margin: 2rem auto;
+    padding: 3rem;
     padding-bottom: 5em;
     border-radius: 10px;
 
@@ -14,12 +14,13 @@
         width: 33%;
     
         .fc-field {
-            margin: 1em 0;
+            margin: 1rem 0;
             display: flex;
             color: $text-color;
     
             &-name {
                 flex: 1;
+                margin-top: 0.5rem;
             }
     
             &-input { 
@@ -37,7 +38,7 @@
     
             &-error {
                 color: red;
-                margin: 0.25em 0;
+                margin: 0.25rem 0;
             }
     
             &-required {
@@ -47,15 +48,16 @@
     }
     
     .link-group {
-        margin: 2em 0 2em 1em;
+        margin: 2em 0 2rem 1rem;
         width: 33%;
         display: flex;
+        justify-content: flex-end;
 
         .link {
             border: 2px solid $text-color-light;
             text-decoration: none;
-            padding: 1em 5em;
-            margin: 0 1em;
+            padding: 1rem 5rem;
+            margin: 0 1rem;
             border-radius: 25px;
             color: $text-color-light;
             background-color: white;
@@ -81,30 +83,26 @@
     }
 }
 
-// Responsive design mixins
 @media (max-width: $screen-xs-max) {
     .add-product-section {
-        .form {
+        .link-group, .form {
             width: 100%;
         }
+    }    
+}
 
+@media (max-width: 400px) and (min-height: 500px) {
+    .add-product-section {
         .link-group {
-            position: relative;
-            right: 3em;
-            display: flex;
+            margin-left: 3rem;
+        }
+    }    
+}
 
-            .link {
-                margin: 0;
-            }
+@media (min-width: $screen-sm-min) and (max-width: $screen-md-max) {
+    .add-product-section {
+        .link-group, .form {
+            width: 67%;
         }
     }
 }
-
-// // Responsive design mixins
-// @media (max-width: $screen-xs-max) and (max-height: 500px) {
-//     .add-product-section {
-//         .link-group {
-//            margin-left: 2em;
-//         }
-//     }
-// }

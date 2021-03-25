@@ -168,17 +168,35 @@ export class ProductListComponent implements OnInit {
 
   handleDrag(event: any, dropIndex?: number) {
     event.preventDefault();
-    event.dataTransfer.dropEffect = "move";
-    if (event.type === 'drop' && dropIndex > -1) {
-      let sourceElement = this.currentlyDragging;
-      if (sourceElement.localName === 'label') {
-        sourceElement = sourceElement.parentElement;
+    if (event instanceof DragEvent) {
+      event.dataTransfer.dropEffect = "move";
+    }
+    
+    if ((event.type === 'drop' || event.type === "touchend") && dropIndex > -1) {
+      if (event instanceof TouchEvent) {
+        const landingElement = this.getDraggableDivFromElement(document.elementFromPoint(
+          event.changedTouches[0].pageX,
+          event.changedTouches[0].pageY
+        ));
+        dropIndex = this.getIndexFromId(landingElement.id);
       }
-      let sourceIndex = sourceElement.id.substring(sourceElement.id.lastIndexOf('-') + 1, sourceElement.id.length);
+      const sourceElement = this.getDraggableDivFromElement(this.currentlyDragging);
+      const sourceIndex = this.getIndexFromId(sourceElement.id);
       const sourceColumn = this.columnDisplayOrder.splice(sourceIndex, 1)[0];
       this.columnDisplayOrder.splice(dropIndex, 0, sourceColumn);
     }
     return false;
+  }
+
+  getDraggableDivFromElement(element: any) {
+    if (element.localName === 'label') {
+      element = element.parentElement;
+    }
+    return element;
+  }
+
+  getIndexFromId(id: string): number {
+    return parseInt(id.substring(id.lastIndexOf('-') + 1, id.length));
   }
 
   formatDate(dateString: string) {
