@@ -3,8 +3,8 @@
         <fa-icon [icon]="faTrash" size="lg"></fa-icon> Delete
     </button>
     <div class="search">
-        <input class="filter-search" #filterSearch type="text" [(ngModel)]="filterText" (keyup)="filterRows($event)">
-        <div class="placeholder">
+        <input class="filter-search" #filterSearch type="text" [(ngModel)]="filterText" (keyup)="filterRows($event)" (blur)="checkIfShowPlaceholder()">
+        <div class="placeholder" *ngIf="showPlaceholder">
             <fa-icon [icon]="faSearch"></fa-icon>
             <span>&nbsp;Search</span>
         </div>

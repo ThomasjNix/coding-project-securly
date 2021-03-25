@@ -31,6 +31,7 @@ export class ProductListComponent implements OnInit {
   filteredProductList: Product[] = [];
   selectedRows: number[] = [];
   currentlyDragging: any;
+  showPlaceholder = true;
   shownItems = {
     fullName: true,
     shortName: true,
@@ -307,5 +308,13 @@ export class ProductListComponent implements OnInit {
    */
   formatDate(dateString: string): Date {
     return new Date(dateString);
+  }
+
+  checkIfShowPlaceholder(): void {
+    if (this.filterSearch.nativeElement.value === '') {
+      this.showPlaceholder = true;
+    } else {
+      this.showPlaceholder = false;
+    }
   }
 }
