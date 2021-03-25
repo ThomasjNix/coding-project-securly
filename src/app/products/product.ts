@@ -4,8 +4,8 @@ export class Product {
     imageUrl: string;
     price: string;
     postedDate: string;
-    
-    constructor(options: {[key:string]: any}) {
+
+    constructor(options: { [key: string]: any} ) {
         this.fullName = options.fullName;
         this.shortName = options.shortName;
         this.imageUrl = options.imageUrl;

@@ -23,18 +23,18 @@ export class NewProductComponent implements OnInit {
    */
   initializeForm(): void {
     this.addProductForm = new FormGroup({
-      'fullName': new FormControl('', [Validators.required]),
-      'shortName': new FormControl(''),
-      'imageUrl': new FormControl('', [Validators.required]),
-      'price': new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]*)\?$')]),
-      'postedDate': new FormControl('', [Validators.required]),
+      fullName: new FormControl('', [Validators.required]),
+      shortName: new FormControl(''),
+      imageUrl: new FormControl('', [Validators.required]),
+      price: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]*)\?$')]),
+      postedDate: new FormControl('', [Validators.required]),
     });
   }
 
   /**
    * Returns true if the specified field has a required validator
-   * @param fieldName  
-   * @returns 
+   * @param fieldName
+   * @returns
    */
   isRequired(fieldName: string): boolean {
     const fieldValidatorFn = this.addProductForm.get(fieldName).validator;
@@ -46,9 +46,9 @@ export class NewProductComponent implements OnInit {
 
   /**
    * Returns true if the specified field has a required error and the field is touched
-   * @param fieldName 
-   * @param errorName 
-   * @returns 
+   * @param fieldName
+   * @param errorName
+   * @returns
    */
   fieldHasError(fieldName: string, errorName: string): boolean {
     const field = this.addProductForm.get(fieldName);

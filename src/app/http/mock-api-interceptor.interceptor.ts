@@ -20,13 +20,13 @@ export class MockApiInterceptor implements HttpInterceptor {
    * GET requests return the localStorage productList
    * POST requests update the productList in localStorage with the request body, then return the updated productList
    * DELETE requests splice the index of the request body from the productList and then return it
-   * @param request 
-   * @param next 
-   * @returns 
+   * @param request
+   * @param next
+   * @returns
    */
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<any> {
     let hasError = false;
-    let error = null;;
+    let error = null;
     let body = null;
     if (request.method === 'GET') {
       switch (request.url) {
@@ -67,7 +67,7 @@ export class MockApiInterceptor implements HttpInterceptor {
   /**
    * Returns the parsed product list from localStorage
    * If none is available, first set it from the products.json file and then return the parsed list from localStorage
-   * @returns 
+   * @returns
    */
   getLocallyStoredProductList(): Product[] {
     if (!localStorage.getItem('productList')) {
@@ -78,7 +78,7 @@ export class MockApiInterceptor implements HttpInterceptor {
 
   /**
    * Returns the list of data from products.json
-   * @returns 
+   * @returns
    */
   readProductsFromJson(): Product[] {
     return products.data;
@@ -87,9 +87,9 @@ export class MockApiInterceptor implements HttpInterceptor {
   /**
    * Gets the list of products from localStorage and adds the provided new Product to the list
    * Then sets the stringified list to localStorage
-   * @param product 
+   * @param product
    */
-  addNewProduct(product: Product) {
+  addNewProduct(product: Product): void {
     const locallyStoredProductList = this.getLocallyStoredProductList();
     locallyStoredProductList.push(product);
     localStorage.setItem('productList', JSON.stringify(locallyStoredProductList));
@@ -99,12 +99,12 @@ export class MockApiInterceptor implements HttpInterceptor {
    * Gets the product list from localStorage and finds the index of the provided Product
    * If one is found, splice it from the list and then set the stringified list in localStorage then return true (success)
    * Else return false (failure - item not found)
-   * @param product 
+   * @param product
    */
-  deleteProducts(products: Product[]): void {
-    let locallyStoredProductList = this.getLocallyStoredProductList();
+  deleteProducts(providedProducts: Product[]): void {
+    const locallyStoredProductList = this.getLocallyStoredProductList();
 
-    for (const product of products) {
+    for (const product of providedProducts) {
       let itemIndex = -1;
 
       // Ensure all properties in localStorage item match provided body parameters
@@ -117,7 +117,7 @@ export class MockApiInterceptor implements HttpInterceptor {
         itemIndex = index;
         return true;
       });
-  
+
       if (itemIndex > -1) {
         locallyStoredProductList.splice(itemIndex, 1);
       }
@@ -127,15 +127,18 @@ export class MockApiInterceptor implements HttpInterceptor {
 
   /**
    * Generates a mock response based off the values configured in the interceptor
-   * @param hasError 
-   * @param error 
-   * @param body 
+   * @param hasError
+   * @param error
+   * @param body
    */
   createMockResponse(hasError: boolean, error: string | null, body: Product[] | null): Observable<HttpResponse<any>> {
     if (hasError) {
       return of(new HttpResponse({status: 500, body: {error}}));
     } else {
-      return of(new HttpResponse({status: 200, body: body}));
+      return of(new HttpResponse({
+        status: 200,
+        body
+      }));
     }
   }
 }

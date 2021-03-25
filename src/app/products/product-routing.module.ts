@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: '', component: ProductListComponent },
   { path: 'add-product', component: NewProductComponent},
   { path: '**', component: ProductListComponent }
-]
+];
 
 @NgModule({
   declarations: [],
