@@ -17,6 +17,7 @@ export class ProductListComponent implements OnInit {
   faSearch = faSearch;
   faPlus = faPlus;
   @ViewChildren('rowCheckboxes') rowCheckboxes;
+  @ViewChildren('columnSelectCheckboxes') columnSelectCheckboxes;
   @ViewChild('selectAllCheckbox') selectAllCheckbox: ElementRef;
   @ViewChild('filterSearch') filterSearch: ElementRef;
   displayTableOptions = false;
@@ -180,16 +181,28 @@ export class ProductListComponent implements OnInit {
         ));
         dropIndex = this.getIndexFromId(landingElement.id);
       }
+      
       const sourceElement = this.getDraggableDivFromElement(this.currentlyDragging);
       const sourceIndex = this.getIndexFromId(sourceElement.id);
-      const sourceColumn = this.columnDisplayOrder.splice(sourceIndex, 1)[0];
-      this.columnDisplayOrder.splice(dropIndex, 0, sourceColumn);
+      if (event instanceof TouchEvent && dropIndex === sourceIndex) {
+        const fieldName = this.getFieldNameFromColName(sourceElement.innerText);
+        this.shownItems[fieldName] = !this.shownItems[fieldName];
+        const relativeCheckbox = this.columnSelectCheckboxes.toArray()[sourceIndex];;
+        relativeCheckbox.nativeElement.checked = !relativeCheckbox.nativeElement.checked;
+      } else {
+        const sourceColumn = this.columnDisplayOrder.splice(sourceIndex, 1)[0];
+        this.columnDisplayOrder.splice(dropIndex, 0, sourceColumn);
+      }
     }
     return false;
   }
 
+  getFieldNameFromColName(name: string): string {
+    return this.columnDisplayOrder.find((col) => col.columnName === name).fieldName;
+  }
+
   getDraggableDivFromElement(element: any) {
-    if (element.localName === 'label') {
+    if (element.localName !== 'div') {
       element = element.parentElement;
     }
     return element;

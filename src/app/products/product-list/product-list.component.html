@@ -27,7 +27,7 @@
             (dragover)="handleDrag($event)"
             (drop)="handleDrag($event, i)">
                 <fa-icon [icon]="faBars" size="lg"></fa-icon>
-                <input type="checkbox" checked name="{{ column.fieldName }}" id="{{ column.fieldName }}" [(ngModel)]="shownItems[column.fieldName]">
+                <input #columnSelectCheckboxes type="checkbox" checked name="{{ column.fieldName }}" id="{{ column.fieldName }}" [(ngModel)]="shownItems[column.fieldName]">
                 <label for="{{ column.fieldName }}">{{ column.columnName }}</label>
                 <hr *ngIf="i !== columnDisplayOrder.length - 1">
             </div>
