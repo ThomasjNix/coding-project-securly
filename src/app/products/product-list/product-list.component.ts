@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
-import { faCog, faBars } from '@fortawesome/free-solid-svg-icons';
+import { faCog, faBars, faTrash, faSearch, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { ColumnProperties } from './column-properties';
 
 @Component({
@@ -13,6 +13,9 @@ import { ColumnProperties } from './column-properties';
 export class ProductListComponent implements OnInit {
   faCog = faCog;
   faBars = faBars;
+  faTrash = faTrash;
+  faSearch = faSearch;
+  faPlus = faPlus;
   @ViewChildren('rowCheckboxes') rowCheckboxes;
   @ViewChild('selectAllCheckbox') selectAllCheckbox: ElementRef;
   @ViewChild('filterSearch') filterSearch: ElementRef;
@@ -29,9 +32,9 @@ export class ProductListComponent implements OnInit {
   selectedRows: number[] = [];
   filterText: string = '';
   columnDisplayOrder: ColumnProperties[] = [
-    {columnName: 'Full Name', fieldName: 'fullName'},
+    {columnName: 'Name', fieldName: 'fullName'},
     {columnName: 'Short Name', fieldName: 'shortName'},
-    {columnName: 'Image URL', fieldName: 'imageUrl'},
+    {columnName: 'Image', fieldName: 'imageUrl'},
     {columnName: 'Price', fieldName: 'price'},
     {columnName: 'Posted Date', fieldName: 'postedDate'}
   ];
@@ -154,6 +157,9 @@ export class ProductListComponent implements OnInit {
       {columnName: 'Price', fieldName: 'price'},
       {columnName: 'Posted Date', fieldName: 'postedDate'}
     ];
+    for (const key of Object.keys(this.shownItems)) {
+      this.shownItems[key] = true;
+    }
   }
 
   handleDragStart(event: any) {

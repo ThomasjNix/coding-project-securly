@@ -1,8 +1,17 @@
 <div class="meta-table-options">
-    <button (click)="deleteSelectedItems()">Delete</button>
-    <input #filterSearch type="text" placeholder="Filter" [(ngModel)]="filterText" (keyup)="filterRows($event)">
-    <button (click)="toggleTableOptionsDisplay()" class="table-meta-settings-toggle">
-        <fa-icon [icon]="faCog" size="xs"></fa-icon>
+    <button class="delete-trash" (click)="deleteSelectedItems()">
+        <fa-icon [icon]="faTrash" size="lg"></fa-icon> Delete
+    </button>
+    <div class="search">
+        <input class="filter-search" #filterSearch type="text" [(ngModel)]="filterText" (keyup)="filterRows($event)">
+        <div class="placeholder">
+            <fa-icon [icon]="faSearch"></fa-icon>
+            <span>&nbsp;Search</span>
+        </div>
+    </div>
+    <a routerLink="/add-product" class="add-product-link"><fa-icon [icon]="faPlus"></fa-icon> Add New Product</a>
+    <button class="table-meta-settings-toggle">
+        <fa-icon [icon]="faCog" size="lg" (click)="toggleTableOptionsDisplay()"></fa-icon>
         <div class="table-meta-settings" [ngClass]="{'hide-table-options': !displayTableOptions}">
             <div
             class="draggable-column-names"
@@ -14,11 +23,12 @@
             (dragleave)="handleDrag($event)"
             (dragover)="handleDrag($event)"
             (drop)="handleDrag($event, i)">
-                <fa-icon [icon]="faBars" size="xs"></fa-icon>
+                <fa-icon [icon]="faBars" size="lg"></fa-icon>
                 <input type="checkbox" checked name="{{ column.fieldName }}" id="{{ column.fieldName }}" [(ngModel)]="shownItems[column.fieldName]">
                 <label for="{{ column.fieldName }}">{{ column.columnName }}</label>
+                <hr *ngIf="i !== columnDisplayOrder.length - 1">
             </div>
-            <button (click)="resetColumnOrder()">Reset to Default</button>
+            <button class="reset-to-default" (click)="resetColumnOrder()">Reset to Default</button>
         </div>
     </button>
 </div>
@@ -34,16 +44,14 @@
       <td *ngIf="showCheckbox()">
           <input #rowCheckboxes type="checkbox" (change)="toggleRowSelected(i)">
       </td>
-      <ng-container *ngFor="let column of columnDisplayOrder">
-          <td *ngIf="shownItems[column.fieldName]">
+      <ng-container *ngFor="let column of columnDisplayOrder;">
+          <td *ngIf="shownItems[column.fieldName]" [ngClass]="{'image-col': column.fieldName === 'imageUrl'}">
               <ng-container [ngSwitch]="column.fieldName">
                 <span *ngSwitchCase="'postedDate'">{{ product[column.fieldName] | date : 'MM/dd/yyyy' }}</span>
-                <img class="row-image" *ngSwitchCase="'imageUrl'" src="{{ product.imageUrl }}" alt="{{ product.imageUrl }}">
+                <img class="row-image" *ngSwitchCase="'imageUrl'" src="{{ product.imageUrl }}" alt="Image">
                 <span *ngSwitchDefault>{{ product[column.fieldName] }}</span>
               </ng-container>
             </td>
       </ng-container>
     </tr>
   </table>
-
-<a routerLink="/add-product">Add item</a>

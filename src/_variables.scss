@@ -1,6 +1,7 @@
 //  Common
 $background-color: #E9EFF7;
 $text-color: #4D5E6C;
+$text-color-light: #8AA1B8;
 
 // Table
 $row-background: white;
@@ -10,3 +11,24 @@ $checkbox-shadow: #B0CCEB;
 $table-borders: #D2E4F7;
 
 // Forms
+$add-button-blue: #0073E6;
+$field-outline: #B0CCEB;
+
+// Responsive design breakpoints
+$screen-xs-max: 768px;
+$screen-sm-min: 769px;
+$screen-sm-min: 991px;
+$screen-md: 992px;
+
+// Responsive design mixins
+@mixin size-phone {
+    @media (max-width: $screen-xs-max) { @content; }
+}
+
+@mixin size-tablet {
+    @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) { @content; }
+}
+
+@mixin size-desktop {
+    @media (min-width: $screen-sm-md-min) { @content; }
+}

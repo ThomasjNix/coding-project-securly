@@ -21,7 +21,7 @@ export class NewProductComponent implements OnInit {
   /**
    * Sets up the form group on component initialization
    */
-  initializeForm() {
+  initializeForm(): void {
     this.addProductForm = new FormGroup({
       'fullName': new FormControl('', [Validators.required]),
       'shortName': new FormControl(''),
@@ -36,7 +36,7 @@ export class NewProductComponent implements OnInit {
    * @param fieldName  
    * @returns 
    */
-  isRequired(fieldName: string) {
+  isRequired(fieldName: string): boolean {
     const fieldValidatorFn = this.addProductForm.get(fieldName).validator;
     if (fieldValidatorFn) {
       return fieldValidatorFn({} as AbstractControl)?.required;
@@ -50,12 +50,12 @@ export class NewProductComponent implements OnInit {
    * @param errorName 
    * @returns 
    */
-  fieldHasError(fieldName: string, errorName: string) {
+  fieldHasError(fieldName: string, errorName: string): boolean {
     const field = this.addProductForm.get(fieldName);
     return field?.errors && field?.errors[errorName] && field?.touched;
   }
 
-  addNewItem() {
+  addNewItem(): void {
     if (this.addProductForm.valid) {
       const newValue = new Product(this.addProductForm.value);
       this.productService.addNewProduct(newValue).subscribe(
@@ -68,6 +68,13 @@ export class NewProductComponent implements OnInit {
       // Will show errors for any untouched or invalid fields not already showing errors
       this.addProductForm.markAllAsTouched();
     }
+  }
+
+  /**
+   * Returns the user to the product list page
+   */
+  navigateToList(): void {
+    this.router.navigate(['/']);
   }
 
 }
