@@ -241,7 +241,7 @@ export class ProductListComponent implements OnInit {
     }
     
     if ((event.type === 'drop' || event.type === "touchend") && dropIndex > -1) {
-      if (event instanceof TouchEvent) {
+      if (window.TouchEvent && event instanceof TouchEvent) {
         const landingElement = this.getDraggableDivFromElement(document.elementFromPoint(
           event.changedTouches[0].pageX,
           event.changedTouches[0].pageY
@@ -251,7 +251,7 @@ export class ProductListComponent implements OnInit {
       
       const sourceElement = this.getDraggableDivFromElement(this.currentlyDragging);
       const sourceIndex = this.getIndexFromId(sourceElement.id);
-      if (event instanceof TouchEvent && dropIndex === sourceIndex) {
+      if (window.TouchEvent && event instanceof TouchEvent && dropIndex === sourceIndex) {
         const fieldName = this.getFieldNameFromColName(sourceElement.innerText);
         this.shownItems[fieldName] = !this.shownItems[fieldName];
         const relativeCheckbox = this.columnSelectCheckboxes.toArray()[sourceIndex];;
