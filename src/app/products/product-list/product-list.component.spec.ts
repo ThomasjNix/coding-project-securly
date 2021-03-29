@@ -1,25 +1,15 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ServiceMocks } from '../../service-mocks';
 import { ProductListComponent } from './product-list.component';
 
 describe('ProductListComponent', () => {
   let component: ProductListComponent;
-  let fixture: ComponentFixture<ProductListComponent>;
+  let productServiceMock = ServiceMocks.MockProductService as any;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ ProductListComponent ]
-    })
-    .compileComponents();
+    component = new ProductListComponent(
+      productServiceMock
+    );
   });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ProductListComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  describe('set indeterminate', () => {});
 });

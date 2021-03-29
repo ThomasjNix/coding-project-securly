@@ -6,5 +6,10 @@ export const ServiceMocks = {
     },
     MockProductService: {
         addNewProduct: () => of({})
+    },
+    MockElementRef: {},
+    MockHttpClient: {
+        get: () => of({}),
+        post: () => of({})
     }
 };;

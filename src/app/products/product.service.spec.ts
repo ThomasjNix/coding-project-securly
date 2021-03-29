@@ -1,16 +1,15 @@
-import { TestBed } from '@angular/core/testing';
-
+import { ServiceMocks } from '../service-mocks';
 import { ProductService } from './product.service';
 
 describe('ProductService', () => {
   let service: ProductService;
+  let httpMock = ServiceMocks.MockHttpClient as any;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(ProductService);
+    service = new ProductService(httpMock);
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
+  describe('addNewProduct', () => {});
+  describe('getListOfProducts', () => {});
+  describe('deleteProducts', () => {});
 });

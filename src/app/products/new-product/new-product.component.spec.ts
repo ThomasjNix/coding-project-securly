@@ -1,4 +1,3 @@
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Product } from '../product';
 import { NewProductComponent } from './new-product.component';
 import { ServiceMocks } from '../../service-mocks';

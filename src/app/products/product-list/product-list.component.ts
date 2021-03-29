@@ -1,4 +1,3 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
@@ -47,7 +46,7 @@ export class ProductListComponent implements OnInit {
     { columnName: 'Posted Date', fieldName: 'postedDate' }
   ];
 
-  constructor(private http: HttpClient, private productService: ProductService) { }
+  constructor(private productService: ProductService) { }
 
   /**
    * Initializes the list
