@@ -7,7 +7,11 @@ export const ServiceMocks = {
     MockProductService: {
         addNewProduct: () => of({})
     },
-    MockElementRef: {},
+    MockElementRef: {
+        nativeElement: {
+            indeterminate: false
+        }
+    },
     MockHttpClient: {
         get: () => of({}),
         post: () => of({})

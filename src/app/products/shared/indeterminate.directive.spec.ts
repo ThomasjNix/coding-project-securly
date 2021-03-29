@@ -11,26 +11,5 @@ describe('ProductListComponent', () => {
     );
   });
 
-  describe('ngOnInit', () => {
-    it('Test', () => {
-      expect(1).toEqual(1);
-    });
-  });
-  describe('deleteItems', () => {});
-  describe('showCheckbox', () => {});
-  describe('toggleRowSelected', () => {});
-  describe('anyButNotAllRowsSelected', () => {});
-  describe('toggleAllRows', () => {});
-  describe('updateViewCheckboxes', () => {});
-  describe('deleteSelectedItems', () => {});
-  describe('filterRows', () => {});
-  describe('toggleTableOptionsDisplay', () => {});
-  describe('resetColumnOrder', () => {});
-  describe('handleDragStart', () => {});
-  describe('handleDrag', () => {});
-  describe('getFieldNameFromColName', () => {});
-  describe('getDraggableDivFromElement', () => {});
-  describe('getIndexFromId', () => {});
-  describe('formatDate', () => {});
-  describe('checkIfShowPlaceholder', () => {});
+  test.skip('Nothing to test', () => 1)
 });
