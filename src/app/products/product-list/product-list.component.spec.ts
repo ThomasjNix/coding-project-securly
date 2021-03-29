@@ -11,5 +11,9 @@ describe('ProductListComponent', () => {
     );
   });
 
-  describe('set indeterminate', () => {});
+  describe('set indeterminate', () => {
+    it('test', () => {
+      expect(1).toEqual(1);
+    });
+  });
 });

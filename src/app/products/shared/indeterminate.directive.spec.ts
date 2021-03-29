@@ -11,7 +11,11 @@ describe('ProductListComponent', () => {
     );
   });
 
-  describe('ngOnInit', () => {});
+  describe('ngOnInit', () => {
+    it('Test', () => {
+      expect(1).toEqual(1);
+    });
+  });
   describe('deleteItems', () => {});
   describe('showCheckbox', () => {});
   describe('toggleRowSelected', () => {});

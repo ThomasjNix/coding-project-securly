@@ -6,7 +6,11 @@ describe('MockApiInterceptor', () => {
     interceptor = new MockApiInterceptor();
   });
 
-  describe('intercept', () => {});
+  describe('intercept', () => {
+    it('test', () => {
+      expect(1).toEqual(1);
+    });
+  });
   describe('getLocallyStoredProductList', () => {});
   describe('readProductsFromJson', () => {});
   describe('addNewProduct', () => {});

@@ -9,7 +9,11 @@ describe('ProductService', () => {
     service = new ProductService(httpMock);
   });
 
-  describe('addNewProduct', () => {});
+  describe('addNewProduct', () => {
+    it('test', () => {
+      expect(1).toEqual(1);
+    });
+  });
   describe('getListOfProducts', () => {});
   describe('deleteProducts', () => {});
 });
