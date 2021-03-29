@@ -5,7 +5,9 @@ export const ServiceMocks = {
         navigate: () => {}
     },
     MockProductService: {
-        addNewProduct: () => of({})
+        addNewProduct: () => of({}),
+        getListOfProducts: () => of([]),
+        deleteProducts: () => of([])
     },
     MockElementRef: {
         nativeElement: {
