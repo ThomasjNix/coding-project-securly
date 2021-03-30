@@ -4,8 +4,8 @@ import { ServiceMocks } from '../../service-mocks';
 
 describe('NewProductComponent', () => {
   let component: NewProductComponent;
-  let routerMock = ServiceMocks.MockRouter as any;
-  let productServiceMock = ServiceMocks.MockProductService as any;
+  const routerMock = ServiceMocks.MockRouter as any;
+  const productServiceMock = ServiceMocks.MockProductService as any;
 
   beforeEach(async () => {
     component = new NewProductComponent(
@@ -25,12 +25,11 @@ describe('NewProductComponent', () => {
     it('Should set up the form group', () => {
       component.initializeForm();
       expect(component.addProductForm).toBeDefined();
-      expect(component.addProductForm.controls['fullName']).toBeDefined();
+      expect(component.addProductForm.controls.fullName).toBeDefined();
     });
   });
   describe('isRequired', () => {
     it('Should return true if the field has a required validator', () => {
-  
       component.initializeForm();
       expect(component.isRequired('fullName')).toBeTruthy();
     });

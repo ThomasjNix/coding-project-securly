@@ -27,6 +27,6 @@ beforeAll(() => {
   context.keys().map(context);
 });
 
-test.skip('Workaround', () => 1)
+test.skip('Workaround', () => 1);
 
 

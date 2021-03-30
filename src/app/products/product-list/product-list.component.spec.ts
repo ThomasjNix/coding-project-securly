@@ -6,7 +6,7 @@ import { ProductListComponent } from './product-list.component';
 
 describe('ProductListComponent', () => {
   let component: ProductListComponent;
-  let productServiceMock = ServiceMocks.MockProductService as any;
+  const productServiceMock = ServiceMocks.MockProductService as any;
 
   beforeEach(async () => {
     component = new ProductListComponent(
@@ -50,7 +50,7 @@ describe('ProductListComponent', () => {
         target: {
           value: ''
         }
-      })
+      });
     });
   });
   describe('deleteItems', () => {
@@ -166,7 +166,7 @@ describe('ProductListComponent', () => {
       jest.spyOn(component.rowCheckboxes, 'toArray').mockReturnValue(testCheckboxValues);
       component.selectedRows = [0, 1, 2, 3, 4];
       component.updateViewCheckboxes();
-      expect(component.selectAllCheckbox.nativeElement.checked).toBeTruthy();;
+      expect(component.selectAllCheckbox.nativeElement.checked).toBeTruthy();
       for (const checkbox of testCheckboxValues) {
         expect(checkbox.nativeElement.checked).toBeTruthy();
       }
@@ -297,7 +297,7 @@ describe('ProductListComponent', () => {
           if (determinate === null) {
             return 0;
           } else {
-            return 2
+            return 2;
           }
         });
 

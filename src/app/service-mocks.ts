@@ -1,4 +1,4 @@
-import { of } from "rxjs";
+import { of } from 'rxjs';
 
 export const ServiceMocks = {
     MockRouter: {
@@ -18,4 +18,4 @@ export const ServiceMocks = {
         get: () => of({}),
         post: () => of({})
     }
-};;
+};

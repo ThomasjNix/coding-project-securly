@@ -95,7 +95,7 @@ describe('MockApiInterceptor', () => {
   });
   describe('getLocallyStoredProductList', () => {
     it('Should set product list in local storage from JSON file and return it', () => {
-      const readProductsFromJsonSpy = jest.spyOn(interceptor, 'readProductsFromJson').mockReturnValue([{"TEST-KEY": "TEST-VALUE"}] as any);
+      const readProductsFromJsonSpy = jest.spyOn(interceptor, 'readProductsFromJson').mockReturnValue([{'TEST-KEY': 'TEST-VALUE'}] as any);
       localStorage.removeItem('productList');
       const result = interceptor.getLocallyStoredProductList();
       expect(result).toEqual([{'TEST-KEY': 'TEST-VALUE'}] as any);

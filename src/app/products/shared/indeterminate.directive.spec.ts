@@ -3,7 +3,7 @@ import { ServiceMocks } from '../../service-mocks';
 
 describe('ProductListComponent', () => {
   let directive: IndeterminateDirective;
-  let elementRefMock = ServiceMocks.MockElementRef as any;
+  const elementRefMock = ServiceMocks.MockElementRef as any;
 
   beforeEach(async () => {
     directive = new IndeterminateDirective(
@@ -11,5 +11,5 @@ describe('ProductListComponent', () => {
     );
   });
 
-  test.skip('Nothing to test', () => 1)
+  test.skip('Nothing to test', () => 1);
 });
