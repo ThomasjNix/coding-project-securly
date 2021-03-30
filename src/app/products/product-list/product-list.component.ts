@@ -203,9 +203,9 @@ export class ProductListComponent implements OnInit {
    */
   resetColumnOrder(): void {
     this.columnDisplayOrder = [
-      { columnName: 'Full Name', fieldName: 'fullName' },
+      { columnName: 'Name', fieldName: 'fullName' },
       { columnName: 'Short Name', fieldName: 'shortName' },
-      { columnName: 'Image URL', fieldName: 'imageUrl' },
+      { columnName: 'Image', fieldName: 'imageUrl' },
       { columnName: 'Price', fieldName: 'price' },
       { columnName: 'Posted Date', fieldName: 'postedDate' }
     ];
